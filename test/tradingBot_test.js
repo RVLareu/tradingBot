@@ -14,6 +14,12 @@ describe("Trading Bot", () => {
             const coinsValue = tradingBot.coinsValue
             expect(coinsValue).to.equal(10)
         })
+        it("Should be created with the coins initial value passed by argument as last trade", () => {
+            const tradingBot = new TradingBot(10)
+            const lastTradeValue = tradingBot.lastTradeValue
+            expect(lastTradeValue).to.equal(10)
+        })
+
     })
 
     describe("Setting values: ", () => {
@@ -79,20 +85,20 @@ describe("Trading Bot", () => {
     })
     describe("Coins Market value ", () => {
         it("Should update correctly", () => {
+            const tradingBot = new TradingBot(10)
+
+            tradingBot.updateCoinsMarketValue()
+            
+            let coinsValue = tradingBot.coinsValue
+            expect(coinsValue).to.be.oneOf([5,15])
+        })
+        it("Shouldnt be below 1", () => {
             const tradingBot = new TradingBot(3)
 
             tradingBot.updateCoinsMarketValue()
             
             let coinsValue = tradingBot.coinsValue
-            expect(coinsValue).to.be.oneOf([2,4])
-        })
-        it("Shouldnt be below 1", () => {
-            const tradingBot = new TradingBot(1)
-
-            tradingBot.updateCoinsMarketValue()
-            
-            let coinsValue = tradingBot.coinsValue
-            expect(coinsValue).to.be.oneOf([1,2])
+            expect(coinsValue).to.be.oneOf([3,8])
         })
     })
 })
