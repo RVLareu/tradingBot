@@ -1,4 +1,5 @@
-# Trading Bot 
+# (Random) Trading Bot 
+
 Trading Bot con nodejs y mocha para la materia técnicas de Diseño FIUBA usando TDD
 
 If last Trading Value is at least 5% greater than current coin value, sells all coins available
