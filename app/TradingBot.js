@@ -4,20 +4,37 @@ export class TradingBot {
     constructor(initial_coin_value) {
         this.wallet = null
         this.coinsValue = initial_coin_value
+        this.lastTradeValue = initial_coin_value
+
     }
 
     setCoinsValue(new_coin_value) {
         this.coinsValue = new_coin_value
     }
 
-    // biased coin, market value should increase 60% of the time
     updateCoinsMarketValue() {
-        if (Math.random() > 0.4) {
-            this.coinsValue += 1
+        if (Math.random() > 0.5) {
+            this.coinsValue += 5
         } else {
-            if(this.coinsValue > 1) {
-                this.coinsValue -= 1
+            if(this.coinsValue > 5) {
+                this.coinsValue -= 5
             }
+        }
+    }
+
+    trade() {
+        if (this.lastTradeValue >= this.coinsValue) {
+            var diff = this.lastTradeValue - this.coinsValue
+            if (diff >= 0.05 * this.lastTradeValue) {
+                this.sellCoins()
+                this.lastTradeValue = this.coinsValue
+            }
+        } else {
+            var diff =  this.coinsValue - this.lastTradeValue
+            if (diff >= 0.05 * this.coinsValue) {
+                this.buyCoins()
+                this.lastTradeValue = this.coinsValue
+            } 
         }
     }
 
@@ -38,5 +55,6 @@ export class TradingBot {
         var earningsFromSellingCoins = coinsAvailable * this.coinsValue
         this.wallet.addToBalance(earningsFromSellingCoins)
         this.wallet.takeFromCoins(coinsAvailable)
+        console.log("Selling " + coinsAvailable + " coins at " + this.coinsValue + ", earning " + earningsFromSellingCoins)
     }
 }
