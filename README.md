@@ -2,6 +2,23 @@
 
 Trading Bot con nodejs y mocha para la materia técnicas de Diseño FIUBA usando TDD
 
+### Steps
+
+```
+git clone <repo_url>
+```
+
+```
+cd tradingBot
+```
+
+```
+npm install
+```
+
+# Running the bot and tests
+
+
 If last Trading Value is at least 5% greater than current coin value, sells all coins available
 
 If last Trading Value is at least 5% less than current coin value, buys all coins possible
