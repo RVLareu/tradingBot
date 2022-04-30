@@ -75,5 +75,24 @@ describe("Trading Bot", () => {
             expect(balance).to.equal(10)
             expect(coins).to.equal(0)
         })
+        
+    })
+    describe("Coins Market value ", () => {
+        it("Should update correctly", () => {
+            const tradingBot = new TradingBot(3)
+
+            tradingBot.updateCoinsMarketValue()
+            
+            let coinsValue = tradingBot.coinsValue
+            expect(coinsValue).to.be.oneOf([2,4])
+        })
+        it("Shouldnt be below 1", () => {
+            const tradingBot = new TradingBot(1)
+
+            tradingBot.updateCoinsMarketValue()
+            
+            let coinsValue = tradingBot.coinsValue
+            expect(coinsValue).to.be.oneOf([1,2])
+        })
     })
 })
