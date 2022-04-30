@@ -31,7 +31,7 @@ export class TradingBot {
             }
         } else {
             var diff =  this.coinsValue - this.lastTradeValue
-            if (diff >= 0.05 * this.coinsValue) {
+            if (diff >= 0.05 * this.lastTradeValue) {
                 this.buyCoins()
                 this.lastTradeValue = this.coinsValue
             } 
@@ -55,6 +55,5 @@ export class TradingBot {
         var earningsFromSellingCoins = coinsAvailable * this.coinsValue
         this.wallet.addToBalance(earningsFromSellingCoins)
         this.wallet.takeFromCoins(coinsAvailable)
-        console.log("Selling " + coinsAvailable + " coins at " + this.coinsValue + ", earning " + earningsFromSellingCoins)
     }
 }
