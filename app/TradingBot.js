@@ -15,7 +15,9 @@ export class TradingBot {
         if (Math.random() > 0.4) {
             this.coinsValue += 1
         } else {
-            this.coinsValue -= 1
+            if(this.coinsValue > 1) {
+                this.coinsValue -= 1
+            }
         }
     }
 
